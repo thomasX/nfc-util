@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="TestAndBuild" name="Packaging Generator">
+	<!--property name="JAVA_HOME" value="C:\Programme\Java\jdk1.5.0_13"/-->
+	
+	<property file="build.properties" />
+<target name="tests" depends="testsOnly" description="run all Tests">	
+</target>
+<target name="compile">
+	<javac srcdir="../NFC_UTIL" includes="**/*.java" debug="on" includeantruntime="false" encoding="ISO-8859-1">		
+		<classpath>
+			<pathelement location="../Junit/junit_3_8_1.jar"/>
+		</classpath>
+	</javac>
+</target>
+<target name="testsOnly" depends="compile" >
+	<junit fork="yes" showoutput="off" printsummary="yes" failureproperty="StopOnError" errorproperty="StopOnError"  >		
+		<formatter type="brief" usefile="false"/>
+		<batchtest todir="../NFC_UTIL">
+		<fileset dir="../NFC_UTIL">
+			<include name="**/*Test.class"/>
+		</fileset>
+		</batchtest>
+		<classpath>
+			<pathelement location="../Junit/junit_3_8_1.jar"/>
+			<pathelement location="../"/>
+		</classpath>
+	</junit> 
+</target>
+<target name="BuildJar" description="build a new jar" > 
+	<fail if="StopOnError" message="Junit Tests failed"/>
+    <jar destfile="../NFC_UTIL/nfcUtil.jar">
+        <zipfileset dir="../" includes="info/**/*.class" excludes="**/*Test.class,**/TestTable/*.class" />
+    </jar>
+</target>
+	
+<target name="TestAndBuild" description="run all tests and build a new jar" depends="tests,BuildJar"> 
+	<fail if="StopOnError" message="Junit Tests failed"/>
+</target>
+	
+</project>
