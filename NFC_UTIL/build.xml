@@ -3,6 +3,44 @@
 	<!--property name="JAVA_HOME" value="C:\Programme\Java\jdk1.5.0_13"/-->
 	
 	<property file="build.properties" />
+	
+	<macrodef name="unsignjar">
+		
+	    <attribute name="jar"/>
+	    	
+	    <sequential>
+		<!-- Remove any existing signatures from a JAR file. -->
+		<tempfile prefix="usignjar-" destdir="${java.io.tmpdir}" property="temp.file"/>
+	        <echo message="Removing signatures from JAR: @{jar}"/>
+	        <mkdir dir="${temp.file}"/>
+		        
+	        <unjar src="@{jar}" dest="${temp.file}">
+	            <patternset>
+	                <include name="**"/>
+	                <exclude name="META-INF/*.SF"/>
+	                <exclude name="META-INF/*.DSA"/>
+	                <exclude name="META-INF/*.RSA"/>
+	            </patternset>
+	        </unjar>
+		        
+	        <delete file="@{jar}" failonerror="true"/>
+		        
+	        <!-- Touch it in case the file didn't have a manifest.
+	             Otherwise the JAR task below will fail if the manifest 
+		     file doesn't exist. -->
+	        <mkdir dir="${temp.file}/META-INF"/>
+	        <touch file="${temp.file}/META-INF/MANIFEST.MF"/>
+		        
+	        <jar destfile="@{jar}" 
+	            basedir="${temp.file}" 
+	            includes="**" 
+	            manifest="${temp.file}/META-INF/MANIFEST.MF"/>
+		        
+	        <delete dir="${temp.file}" failonerror="true"/>
+	    </sequential>
+	</macrodef>
+	
+	
 <target name="tests" depends="testsOnly" description="run all Tests">	
 </target>
 <target name="compile">
@@ -29,8 +67,10 @@
 <target name="BuildJar" description="build a new jar" > 
 	<fail if="StopOnError" message="Junit Tests failed"/>
     <jar destfile="../NFC_UTIL/nfcUtil.jar">
-        <zipfileset dir="../" includes="info/**/*.class" excludes="**/*Test.class,**/TestTable/*.class" />
+        <zipfileset dir="../NFC_UTIL" includes="**/*.class" excludes="**/*Test.class,**/TestTable/*.class" />
     </jar>
+	
+	<unsignjar jar="../NFC_UTIL/nfcUtil.jar" />
 </target>
 	
 <target name="TestAndBuild" description="run all tests and build a new jar" depends="tests,BuildJar"> 

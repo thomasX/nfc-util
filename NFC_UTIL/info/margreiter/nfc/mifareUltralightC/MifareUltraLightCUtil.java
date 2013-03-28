@@ -35,15 +35,9 @@ public abstract class MifareUltraLightCUtil {
 		List<CardTerminal> terminals;
 
 		terminals = factory.terminals().list();
-		System.out.println(terminals);
-		 // get the first terminal
         CardTerminal terminal = terminals.get(0);
-        // establish a connection with the card
         Card card = terminal.connect("*");
-        System.out.println("card: " + card);
-        System.out.println(byteArrayToHexString(card.getATR().getBytes()));
         if (ATRS.equals(new String(card.getATR().getBytes()))) throw new NFCException("weSupportOnlyMifareUltralightCTags");
-        // disconnect
         CardChannel channel = card.getBasicChannel();
         return channel;
 	}
@@ -51,7 +45,7 @@ public abstract class MifareUltraLightCUtil {
 	public String readCardIdentity(CardChannel channel) throws CardException{
         byte[] readIdentityAPDU = {(byte) 0xFF, (byte) 0xCA, (byte) 0x00, (byte) 0x00, (byte) 0x00};
         ResponseAPDU response = channel.transmit(new CommandAPDU(readIdentityAPDU));
-        return new String(response.getData());
+        return new String(byteArrayToHexString(response.getData()));
 	}
 	
 	protected String read(CardChannel channel) throws NFCException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, CardException {
@@ -83,7 +77,6 @@ public abstract class MifareUltraLightCUtil {
 	
 	private String extractUserData(String nfcMemory) {
 		// TODO Test 27.03.2013
-		System.out.println("MifareUltraLightCUtil.extractUserData() " + nfcMemory);
 		String result = "";
 		byte[] totalBytes = nfcMemory.getBytes();
 		Integer startbyte=null;
@@ -185,7 +178,6 @@ public abstract class MifareUltraLightCUtil {
 				curBlockData=untransmitted;
 				untransmitted="";
 			}
-			System.out.println("block:" + block + "#" + curBlockData + "#");
 			writeBlock(channel,block + FIRST_DATA_BLOCK_NUMBER,curBlockData.getBytes());
 			block++;
 		}	        

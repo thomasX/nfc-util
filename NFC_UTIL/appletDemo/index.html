@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  
+<script type="text/javascript">
+  
+    function printResult(result) {
+            $("#readResult").text(result)
+    }
+    function processRFID(result){
+    	var obj = eval("(" + result + ')');
+    	var id=obj.id;
+    	var content=obj.content;
+            printResult('Tag wurde gelesen:');
+            printResult($("#tagID").text(id));
+            printResult($("#tagValue").text(content));
+    }
+
+</script>
+</head>
+
+<body>
+    <input type="button" id="read" value="Read">
+    <table width="100%">
+    	<thead>
+    	  <th>tagID</th>
+    	  <th>tagValue</th>
+    	</thead>
+    	<tbody>
+    	<tr>
+    	  <td align="center" id='tagID'></td>
+    	  <td align="center" id='tagValue'></td>
+    	  </tr>
+    	</tbody>
+    </table>
+    <div id="readResult"></div>
+
+    <!--applet mayscript="true" code = 'rfid/RFIDAccess.class' archive = 'applet-library-management.jar,libs/log4j-1.2.16.jar,libs/yarf-0.2.jar,libs/plugin.jar' name="rfid" height="100" width="300"></applet -->
+    <applet mayscript="true" code = 'info/margreiter/nfc/applet/NFCReaderApplet.class' archive = 'nfcUtil.jar' name="rfid" height="50" width="300">
+   	 <param name="callback" value="processRFID">
+    </applet>
+    
+</body>
+</html>
+
+

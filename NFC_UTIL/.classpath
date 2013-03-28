@@ -3,5 +3,7 @@
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.6.0_33"/>
 	<classpathentry kind="lib" path="/Junit/junit_3_8_1.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/Java/jdk1.6.0_33/jre/lib/plugin.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/FerpsCore"/>
 	<classpathentry kind="output" path=""/>
 </classpath>

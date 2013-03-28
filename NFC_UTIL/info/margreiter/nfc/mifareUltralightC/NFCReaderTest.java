@@ -29,6 +29,7 @@ public class NFCReaderTest extends TestCase {
 	protected void tearDown() throws Exception {
 		super.tearDown();
 	}
+
 	public void testRead(){
 		
 		String testString = "0300@06<40005000";
