@@ -72,7 +72,11 @@
 	
 	<unsignjar jar="../NFC_UTIL/nfcUtil.jar" />
 </target>
-	
+<target name="SignJar" description="build a new jar" depends="BuildJar">
+	    <signjar alias="..." keystore="..." storepass="..." lazy="true">    
+	    	<fileset dir="../NFC_UTIL/" includes="nfcUtil.jar" />
+	    </signjar>
+</target>
 <target name="TestAndBuild" description="run all tests and build a new jar" depends="tests,BuildJar"> 
 	<fail if="StopOnError" message="Junit Tests failed"/>
 </target>

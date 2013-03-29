@@ -40,7 +40,7 @@ public class NFCReaderApplet extends Applet {
 	    		  if (! card.equals(tagContent)) {
 	    			  tagContent=card;
 //	    			  System.out.println("tagID:" + tagID + "    tagValue:" + tagValue);
-	    			  System.out.println(new Date().toString() + " .... tag wurde gelesen:");
+	    			  System.out.println(new Date().toString() + " .... tag wurde gelesen:\007");
 	    			  String result="{ id: '" + tagID + "',content: '" + tagValue + "' }";
 	    			  jso.call(callback,new String[]{result});	    			  
 	    		  }

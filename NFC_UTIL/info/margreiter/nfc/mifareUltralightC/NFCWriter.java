@@ -14,6 +14,7 @@ public class NFCWriter extends MifareUltraLightCUtil {
     	readCardIdentity(channel);
  	    write(channel,data);
         channel.getCard().disconnect(false);
+        System.out.println("\007");
     }
 	
 }
