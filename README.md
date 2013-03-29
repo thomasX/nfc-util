@@ -4,7 +4,8 @@ nfc-util
 A small and simple java nfc writer/reader for the mifare ultralight C Tags   written in Java 1.6
 
 
-usage: 
+desktop usage: 
+==============
 
 
 1.) Reading a Tag:
@@ -46,7 +47,9 @@ NFCWriter writer = new NFCWriter();
 writer.lockTag();
 
 
-
+web usage:
+==========
+... (see the example in the folder appletDemo) or have a look in the wiki https://github.com/thomasX/nfc-util/wiki
 
 
 
