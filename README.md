@@ -49,7 +49,7 @@ writer.lockTag();
 
 web usage:
 ==========
-... (see the example in the folder appletDemo) or have a look in the wiki
+... (see the example in the folder appletDemo) or have a look in the wiki https://github.com/thomasX/nfc-util/wiki
 
 
 
