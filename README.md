@@ -49,8 +49,40 @@ writer.lockTag();
 
 web usage:
 ==========
+... (see the example in the folder appletDemo) :
 
+1.) add the nfcUtil.jar to the webcontent
+-----------------------------------------
 
+2.) add an applet to your site and define the callback method
+-------------------------------------------------------------
+
+<applet mayscript="true" code = 'info/margreiter/nfc/applet/NFCReaderApplet.class'
+
+archive = 'nfcUtil.jar' name="rfid" height="50" width="300">
+
+<param name="callback" value="processRFID">
+
+</applet>
+
+3.) create a callback method in the site
+----------------------------------------
+
+<script type="text/javascript">
+
+function processRFID(result){
+
+var obj = eval("(" + result + ')');
+
+var id=obj.id;
+
+var content=obj.content;
+
+... do something with the contant ...
+
+}
+
+</script>
 
 
 
