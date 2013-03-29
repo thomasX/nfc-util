@@ -3,6 +3,7 @@ package info.margreiter.nfc.mifareUltralightC;
 
 import info.margreiter.nfc.Exceptions.NFCException;
 
+import java.awt.Toolkit;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Properties;
@@ -30,6 +31,16 @@ public class NFCReaderTest extends TestCase {
 		super.tearDown();
 	}
 
+	public void testSound(){
+		try {
+			Toolkit.getDefaultToolkit().beep();
+			Thread.currentThread().sleep(200);
+			Toolkit.getDefaultToolkit().beep();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void testRead(){
 		
 		String testString = "0300@06<40005000";

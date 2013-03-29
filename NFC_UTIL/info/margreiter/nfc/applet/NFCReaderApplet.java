@@ -3,6 +3,7 @@ package info.margreiter.nfc.applet;
 import info.margreiter.nfc.mifareUltralightC.NFCReader;
 
 import java.applet.Applet;
+import java.awt.Toolkit;
 import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.Delayed;
@@ -16,12 +17,14 @@ public class NFCReaderApplet extends Applet {
 	private JSObject jso=null;
 	private Properties tagContent=new Properties();
 	private String callback;
+	private boolean noSound=false;
 	
 	 @Override
 	    public void start() {
 		 
 		 
 		 	callback=getParameter("callback");
+		    checkSound();
 		 	System.out.println("registered Callbackfunction:" + callback);
 	        jso=JSObject.getWindow(this);
 	        NFCReader reader= new NFCReader();
@@ -29,6 +32,26 @@ public class NFCReaderApplet extends Applet {
 	        while (! interrupted) {
 				readCard(reader);
 				delay(300);
+			}
+	    }
+	    private void checkSound() {
+		// TODO Test 29.03.2013
+	    	try{
+		 		String soundValue = (getParameter("noSound")).trim().toLowerCase();
+		 		noSound=(soundValue.equals("true"));
+		 	}catch (Exception e) {
+				// TODO: handle exception
+		 		System.out.println("dfasfa");
+			}
+	    }
+		private void playOK(){
+			try {
+				Toolkit.getDefaultToolkit().beep();
+				Thread.currentThread().sleep(200);
+				Toolkit.getDefaultToolkit().beep();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 	    }
 	 
@@ -39,8 +62,8 @@ public class NFCReaderApplet extends Applet {
 	    		  String tagValue = (String) card.get(NFCReader.PROPERTY_TYPE_TAG_VALUE);
 	    		  if (! card.equals(tagContent)) {
 	    			  tagContent=card;
-//	    			  System.out.println("tagID:" + tagID + "    tagValue:" + tagValue);
-	    			  System.out.println(new Date().toString() + " .... tag wurde gelesen:\007");
+	    			  System.out.println(new Date().toString() + " .... tag wurde gelesen:");
+	    			  if (! noSound) playOK();
 	    			  String result="{ id: '" + tagID + "',content: '" + tagValue + "' }";
 	    			  jso.call(callback,new String[]{result});	    			  
 	    		  }
