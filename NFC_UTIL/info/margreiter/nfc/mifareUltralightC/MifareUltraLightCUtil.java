@@ -54,7 +54,7 @@ public abstract class MifareUltraLightCUtil {
             ResponseAPDU response = channel.transmit(new CommandAPDU(readIdentityAPDU));
 	        checkResponse(response);
 	        String nfcMemory = "";
-	        for (int i = FIRST_DATA_BLOCK_NUMBER; i < LAST_DATA_BLOCK_NUMBER; i++) {
+	        for (int i = FIRST_DATA_BLOCK_NUMBER; i <= LAST_DATA_BLOCK_NUMBER; i++) {
 	        	ResponseAPDU nfcData = readBlock(channel, i);
         		nfcMemory +=new String(nfcData.getData());
 			}
@@ -185,7 +185,7 @@ public abstract class MifareUltraLightCUtil {
 		}	        
         int dummyblockNR = block+FIRST_DATA_BLOCK_NUMBER;
         byte[] dummyBlockdata = createDummyblockData();
-        while (dummyblockNR < LAST_DATA_BLOCK_NUMBER) {
+        while (dummyblockNR <= LAST_DATA_BLOCK_NUMBER) {
         	System.out.println(dummyblockNR);
         	writeBlock(channel,dummyblockNR, dummyBlockdata);
         	dummyblockNR++;
