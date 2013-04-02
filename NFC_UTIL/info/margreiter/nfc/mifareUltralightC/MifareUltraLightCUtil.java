@@ -25,7 +25,7 @@ public abstract class MifareUltraLightCUtil {
 	//TODO Test 27.03.2013
 	protected static final int BLOCK_LENGTH = 4;
 	protected static final int FIRST_DATA_BLOCK_NUMBER = 4;
-	protected static final int LAST_DATA_BLOCK_NUMBER = 41;
+	protected static final int LAST_DATA_BLOCK_NUMBER = 39;
 
 	
 
@@ -178,12 +178,15 @@ public abstract class MifareUltraLightCUtil {
 				curBlockData=untransmitted;
 				untransmitted="";
 			}
-			writeBlock(channel,block + FIRST_DATA_BLOCK_NUMBER,curBlockData.getBytes());
+        	int curBlocknumber = block + FIRST_DATA_BLOCK_NUMBER;
+        	if (curBlocknumber > LAST_DATA_BLOCK_NUMBER) throw new NFCException("invalidNFCdata");
+			writeBlock(channel,curBlocknumber,curBlockData.getBytes());
 			block++;
 		}	        
         int dummyblockNR = block+FIRST_DATA_BLOCK_NUMBER;
         byte[] dummyBlockdata = createDummyblockData();
         while (dummyblockNR < LAST_DATA_BLOCK_NUMBER) {
+        	System.out.println(dummyblockNR);
         	writeBlock(channel,dummyblockNR, dummyBlockdata);
         	dummyblockNR++;
 		}

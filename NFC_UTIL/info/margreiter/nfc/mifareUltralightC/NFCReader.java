@@ -37,7 +37,6 @@ public class NFCReader extends MifareUltraLightCUtil{
         Properties result = new Properties();
         result.put(PROPERTY_TYPE_TAG_IDENTITY, identity);
         result.put(PROPERTY_TYPE_TAG_VALUE, value);
-        System.out.println("\007");
 		return result;
 	}
 
