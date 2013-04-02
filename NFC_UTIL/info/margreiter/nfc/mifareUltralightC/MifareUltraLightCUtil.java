@@ -185,8 +185,7 @@ public abstract class MifareUltraLightCUtil {
 		}	        
         int dummyblockNR = block+FIRST_DATA_BLOCK_NUMBER;
         byte[] dummyBlockdata = createDummyblockData();
-        while (dummyblockNR <= LAST_DATA_BLOCK_NUMBER) {
-        	System.out.println(dummyblockNR);
+        while (dummyblockNR <= LAST_DATA_BLOCK_NUMBER) {        	
         	writeBlock(channel,dummyblockNR, dummyBlockdata);
         	dummyblockNR++;
 		}
