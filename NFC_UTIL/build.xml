@@ -68,13 +68,12 @@
 	<fail if="StopOnError" message="Junit Tests failed"/>
     <jar destfile="../NFC_UTIL/nfcUtil.jar">
         <zipfileset dir="../NFC_UTIL" includes="**/*.class" excludes="**/*Test.class,**/TestTable/*.class" />
-    </jar>
-	
+    </jar>	
 	<unsignjar jar="../NFC_UTIL/nfcUtil.jar" />
 </target>
 <target name="SignJar" description="build a new jar" depends="BuildJar">
 		<signjar alias="...." keystore="....." storepass="...." lazy="true" >
-		   
+		
 	    	<fileset dir="../NFC_UTIL/" includes="nfcUtil.jar" />
 	    </signjar>
 </target>

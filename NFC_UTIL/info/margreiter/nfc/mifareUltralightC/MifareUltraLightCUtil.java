@@ -45,7 +45,10 @@ public abstract class MifareUltraLightCUtil {
 	public String readCardIdentity(CardChannel channel) throws CardException{
         byte[] readIdentityAPDU = {(byte) 0xFF, (byte) 0xCA, (byte) 0x00, (byte) 0x00, (byte) 0x00};
         ResponseAPDU response = channel.transmit(new CommandAPDU(readIdentityAPDU));
-        return new String(byteArrayToHexString(response.getData()));
+        String idString = byteArrayToHexString(response.getData());
+        String idStart = idString.substring(0,6);
+        String idStop = idString.substring(8);
+        return idStart+idStop;
 	}
 	
 	protected String read(CardChannel channel) throws NFCException, InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, CardException {
