@@ -36,6 +36,7 @@ public class NFCWriterTest extends TestCase {
 		//		Pair<String,String> result = new Pair<String, String>("","");
 		try {
 			writer.write(testString);
+			Thread.currentThread().sleep(1000);
 			result=new NFCReader().read();
 		} catch (NFCException e) {
 			// TODO Auto-generated catch block
@@ -56,6 +57,9 @@ public class NFCWriterTest extends TestCase {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (BadPaddingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

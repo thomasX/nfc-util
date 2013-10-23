@@ -2,6 +2,15 @@
 <project default="TestAndBuild" name="Packaging Generator">
 	<!--property name="JAVA_HOME" value="C:\Programme\Java\jdk1.5.0_13"/-->
 	
+	
+	<property name="sign.KeyAlias" value="6d30391c-1edc-11e3-8f3f-2c4138a82675"/>
+	<property name="sign.KeyStore" value="${workspace.projectclasspath}../../../../ferpsgit/PrivateFiles/osdeveloper/tomtom.pfx"/>
+	<property name="sign.Storepass" value="tomtom"/>
+	<property name="sign.storetype" value="pkcs12"/>
+	
+	
+	
+	
 	<property file="build.properties" />
 	
 	<macrodef name="unsignjar">
@@ -72,10 +81,9 @@
 	<unsignjar jar="../NFC_UTIL/nfcUtil.jar" />
 </target>
 <target name="SignJar" description="build a new jar" depends="BuildJar">
-		<signjar alias="...." keystore="....." storepass="...." lazy="true" >
-		
+	    <signjar alias="${sign.KeyAlias}" keystore="${sign.KeyStore}" storepass="${sign.Storepass}" storetype="${sign.storetype}" lazy="true">
 	    	<fileset dir="../NFC_UTIL/" includes="nfcUtil.jar" />
-	    </signjar>
+		</signjar>
 </target>
 <target name="TestAndBuild" description="run all tests and build a new jar" depends="tests,BuildJar"> 
 	<fail if="StopOnError" message="Junit Tests failed"/>
