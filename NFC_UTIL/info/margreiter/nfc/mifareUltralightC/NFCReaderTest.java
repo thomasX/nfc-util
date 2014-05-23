@@ -1,6 +1,8 @@
 package info.margreiter.nfc.mifareUltralightC;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import info.margreiter.nfc.Exceptions.NFCException;
 
 import java.awt.Toolkit;
@@ -13,24 +15,23 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.smartcardio.CardException;
 
-import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-public class NFCReaderTest extends TestCase {
+public class NFCReaderTest {
 
-	public NFCReaderTest(String name) {
-		super(name);
-	}
 
 	//TODO Test 27.03.2013
-
+	@Before
 	protected void setUp() throws Exception {
-		super.setUp();
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 
+	@Test
 	public void testSound(){
 		try {
 			Toolkit.getDefaultToolkit().beep();
@@ -41,6 +42,8 @@ public class NFCReaderTest extends TestCase {
 			e.printStackTrace();
 		}
 	}
+	
+	@Test
 	public void testRead(){
 		
 		String testString = "0300@06<40005000";

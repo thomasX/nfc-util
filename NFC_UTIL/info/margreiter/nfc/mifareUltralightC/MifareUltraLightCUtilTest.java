@@ -1,26 +1,26 @@
 package info.margreiter.nfc.mifareUltralightC;
 
+import static org.junit.Assert.assertTrue;
 import info.margreiter.nfc.Exceptions.NFCException;
-import info.margreiter.nfc.mifareUltralightC.NFCWriter;
 
 import javax.smartcardio.CardException;
 
 import junit.framework.TestCase;
 
-public class MifareUltraLightCUtilTest extends TestCase {
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
-	public MifareUltraLightCUtilTest(String name) {
-		super(name);
-	}
+public class MifareUltraLightCUtilTest {
 
 	//TODO Test 27.03.2013
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@Before
+	public void setUp() throws Exception {
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 	
 	/**
@@ -39,6 +39,7 @@ public class MifareUltraLightCUtilTest extends TestCase {
 			e.printStackTrace();
 		}
 	}
+	@Test
 	public void testDummyTest(){
 		assertTrue(true);
 	}
