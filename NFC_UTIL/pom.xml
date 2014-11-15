@@ -71,6 +71,24 @@
       		</archive>
       	</configuration>
       </plugin>
+       <!-- plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jarsigner-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+            <phase>package</phase>
+            <configuration>
+              <keystore>src/main/keystore/signing-jar.keystore</keystore>
+              <alias>applet</alias>
+              <storepass>applet</storepass>
+              <keypass>applet</keypass>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin-->
     </plugins>
   </build>
 </project>
